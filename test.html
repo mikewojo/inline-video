@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
+		<title>Mobile Inline Video</title>
+		<script type="text/javascript" src="mobile-inline-video.js"></script>
+	</head>
+	<body>
+		<div id="video"></div>
+		<button id="play">Play</button>
+		<button id="pause">Pause</button>
+		<button id="seek">Seek to 4s</button>
+
+		<script type="text/javascript">
+			var vid = MIV.new({src: 'http://www.w3schools.com/html/mov_bbb.mp4', id: 'test'});
+			vid.appendTo(document.getElementById('video'));
+
+			document.getElementById('play').onclick = function() {
+				vid.play();
+			};
+			document.getElementById('pause').onclick = function() {
+				vid.pause();
+			};
+			document.getElementById('seek').onclick = function() {
+				vid.seek(4);
+			};
+		</script>
+	</body>
+</html>
