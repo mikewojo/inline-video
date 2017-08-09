@@ -1,60 +1,53 @@
-# mobile-inline-video :ok_hand:
+# InlineVideo.js
 
-A tiny, dependency-free library to let you play inline video on mobile devices like iPhone without opening the native player.
+- Play video inline on iOS Safari without opening the native player
+- Uses native `playsinline` support for iOS 10 and up
+- Falls back to regular HTML5 video for all other cases
+- Doesn't need canvas
+
+## How does it work?
+
+For iOS devices below iOS 10 without native `playsinline` support, an audio element is created with the video's source, the audio is played, and `requestAnimationFrame` is used to sync the video's `currentTime` to the audio's. Even though the video itself isn't playing, when the `currentTime` is updated, the video's current frame is updated and it appears to be playing as normal in sync with the actually playing audio.
+
+For iOS devices >= iOS 10, the `playsinline` attribute is added for native inline playback.
+
+For all other cases, a regular HTML5 video player is used.
 
 ## Usage
 
-### Include the JS:
-`<script type="text/javascript" src="mobile-inline-video.js"></script>`
+You can...
 
-### Make a new MIV (mobile inline video) object:
-`var vid = MIV.new({src: 'http://www.w3schools.com/html/mov_bbb.mp4', id: 'test'});`
+**Import it:**<br>
+`import InlineVideo from './InlineVideo';`
 
-A new MIV object can have the following parameters:
-- **src** - URL to the video
-- _id_ (optional) - ID name to give the object if you want to reference it with MIV.get() later
-- _width_ (optional) - Force a width on the video
-- _height_ (optional) - Force a height on the video
+**Or include it as a script:**<br>
+`<script type="text/javascript" src="InlineVideo.min.js"></script>`
 
-### Append the object to your page:
+...etc.
+
+### Make an InlineVideo player:
 ```
-//Append to body of page (default)
-vid.appendTo();
-
-//Append to an element with the "video" id
-vid.appendTo(document.getElementById('video'));
+let video = new InlineVideo({
+	src: 'http://www.w3schools.com/html/mov_bbb.mp4', // url of video
+	parent: '#video', // where to append the video
+	debug: true // optionally show some console logs
+});
 ```
 
-### Play/start the video:
+### Options
+- **src** - URL of the video
+- **parent** - An element to append the video to. Can be a string or object.
+- _width_ - Force video width
+- _height_ - Force video height
+- _debug_ - Show some console logs to see which player ends up being used
+- _onPlay_ - Called when video is played
+- _onPause_ - Called when video is paused
+- _onEnded_ - Called when video has ended
 
-Please note, for iOS devices, this needs to be initiated from a click event.
-
-```
-document.getElementById('playButton').onclick = function() {
-	vid.play();
-	// or...
-	// vid.start();
-};
-```
-
-### Controlling the video:
-
-```
-//Play
-document.getElementById('playButton').onclick = function() {
-	vid.play();
-};
-
-//Pause
-document.getElementById('pauseButton').onclick = function() {
-	vid.pause();
-};
-
-//Seek to 4 seconds in
-document.getElementById('seekButton').onclick = function() {
-	vid.seek(4);
-};
-```
+### Methods
+- `.play()` - Play the video
+- `.pause()` - Pause the video
+- `.seek(time)` - Seek to a specified time
 
 ## Thanks
 

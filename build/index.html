@@ -6,8 +6,8 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
-		<title>Mobile Inline Video</title>
-		<script type="text/javascript" src="mobile-inline-video.js"></script>
+		<title>iOS Inline Video</title>
+
 	</head>
 	<body>
 		<div id="video"></div>
@@ -15,18 +15,22 @@
 		<button id="pause">Pause</button>
 		<button id="seek">Seek to 4s</button>
 
+		<script type="text/javascript" src="./InlineVideo.js"></script>
 		<script type="text/javascript">
-			var vid = MIV.new({src: 'http://www.w3schools.com/html/mov_bbb.mp4', id: 'test'});
-			vid.appendTo(document.getElementById('video'));
+			var video = new InlineVideo({
+				src: 'http://www.w3schools.com/html/mov_bbb.mp4',
+				parent: '#video',
+				debug: true
+			});
 
 			document.getElementById('play').onclick = function() {
-				vid.play();
+				video.play();
 			};
 			document.getElementById('pause').onclick = function() {
-				vid.pause();
+				video.pause();
 			};
 			document.getElementById('seek').onclick = function() {
-				vid.seek(4);
+				video.seek(4);
 			};
 		</script>
 	</body>
