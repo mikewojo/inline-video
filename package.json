@@ -30,9 +30,8 @@
     "ios",
     "safari",
     "inline",
+		"playsinline",
     "video",
-    "canvas",
-    "library"
   ],
   "author": "Mike Wojo",
   "license": "MIT",

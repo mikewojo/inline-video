@@ -15,7 +15,7 @@ For all other cases, a regular HTML5 video player is used.
 
 ## Usage
 
-You can...
+First...
 
 **Import it:**<br>
 `import InlineVideo from './InlineVideo';`
